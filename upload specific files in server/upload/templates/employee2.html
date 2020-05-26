@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <link rel="stylesheet" href={% static 'upload/css/ee.css' %}>
+</head>
+<body>
+    <div class="sidenav">
+         <div class="login-main-text" style="margin-top: 80px">
+            <h2>Hello {{ u }}</h2><br>
+            <span>Who viewd your Profile : </span><br><br>
+             <span>Who opend your CV : </span>
+         </div>
+    </div>
+    <div class="main">
+        <div style="margin-top:20px; margin-bottom: -50px ">
+        {%include 'messages.html'%}
+        </div>
+         <div class="col-md-6 col-sm-12">
+            <div class="login-form" style="margin-top: 70px; margin-bottom: 50px">
+               <form method="post" enctype="multipart/form-data" action="{% url 'saveupdate' %}">
+                   {% csrf_token %}
+                   <div class="form-group" style="margin-bottom: 30px">
+                     <label style="font-size: large">Username</label>
+                     <input type="text" class="form-control" placeholder="username" value="{{ d.username }}" name="UserName" readonly>
+                  </div>
+                  <div class="form-group" style="margin-bottom: 30px">
+                     <label style="font-size: large">Job title</label>
+                     <input type="text" class="form-control" placeholder="job title" name="JobTitle" value="{{ d.job }}" required>
+                  </div>
+                   <div class="form-group" style="margin-bottom: 30px">
+                     <label style="font-size: large">Level you have reached as a junior</label>
+                     <input type="number" class="form-control" placeholder="your level" min="0" max="10" name="Level" value="{{ d.level }}" required>
+                  </div>
+                  <div class="form-group" style="margin-bottom: 20px">
+                     <label style="font-size: large">your CV</label><br>
+{#                      <a style="color: blue" href="{% url 'read' u %}">{{ d.file }}</a><br>#}
+                     {{ form.as_p }}
+                  </div>
+                  <button type="submit" class="btn btn-black" style="margin-left: 100px">Update</button>
+{#                   <button type="submit" class="btn btn-danger" style="margin-left: 20px">Delete</button>#}
+               </form>
+            </div>
+         </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+</body>
+</html>

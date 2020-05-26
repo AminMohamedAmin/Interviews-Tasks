@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <style>
+        body{
+            margin: auto;
+        }
+        table{
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<table border="2px">
+    <tr>
+        <th>ID</th>
+        <th>name</th>
+        <th>file</th>
+    </tr>
+    {% for item in data %}
+    <tr>
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td><a style="color: blue" href="{% url 'read' item.id  %}">{{ item.file}}</a></td>
+    </tr>
+    {% endfor %}
+</table><br>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+</form>
+</body>
+</html>
